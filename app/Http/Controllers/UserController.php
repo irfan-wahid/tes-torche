@@ -10,16 +10,19 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function register(Request $request){
+        //Validasi request
         $validated = $request->validate([
             'email' => ['string', 'required', 'email', 'max:255'],
             'password' => ['string', 'required', 'max:255'],
             'name' => ['string', 'required', 'max:255'],
         ]);
 
+        //Save data ke database
         $user = new User($validated);
         $user->password = Hash::make($validated['password']);
         $user->save();
 
+        //Return response
         if ($user) {
             return response()->json([
                 'message' => 'success',
@@ -34,6 +37,7 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
+        //Validasi Request
         $validated = $request->validate([
             'email' => ['string', 'required', 'email', 'max:255'],
             'password' => ['string', 'required', 'max:255']

@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
-Route::get('/login', [\App\Http\Controllers\UserController::class, 'login']);
-Route::put('/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
-Route::delete('/delete', [\App\Http\Controllers\UserController::class, 'delete']);
+Route::prefix('user')->group(function (){
+    Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
+    Route::get('/login', [\App\Http\Controllers\UserController::class, 'login']);
+    Route::put('/changePassword', [\App\Http\Controllers\UserController::class, 'changePassword']);
+    Route::delete('/delete', [\App\Http\Controllers\UserController::class, 'delete']);
+});
