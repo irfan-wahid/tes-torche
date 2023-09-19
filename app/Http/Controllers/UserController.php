@@ -23,17 +23,16 @@ class UserController extends Controller
         $user->save();
 
         //Return response
-        if ($user) {
-            return response()->json([
-                'message' => 'success',
-                'data' => $user,
-            ]);
-        } else {
+        if (!$user) {
             return response()->json([
                 'message' => 'Gagal membuat akun',
             ]
             );
         }
+        return response()->json([
+            'message' => 'success',
+            'data' => $user,
+        ])->setStatusCode(201);
     }
 
     public function login(Request $request){
